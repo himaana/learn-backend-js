@@ -38,6 +38,28 @@ app.get("/dashboard", checkAuth, (req, res) => {
     res.send("Welcome to Dashboard");
 });
 
+/* 
+    Task 3
+    Middleware Order
+
+    Add middleware:
+    app.use(express.json());
+
+    Create route POST /login
+
+    Body:
+    {"username" : "admin"}
+
+    Response:
+    Hello admin
+*/
+app.use(express.json());
+
+app.post("/login", (req, res) => {
+    const username = req.body.username;
+    res.send(`Hello ${username}`);
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
