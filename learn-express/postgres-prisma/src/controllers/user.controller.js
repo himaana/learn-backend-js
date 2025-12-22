@@ -1,6 +1,14 @@
-import { fetchUser } from "../services/user.service.js";
+import { createUser, getUser } from "../services/user.service.js";
 
-export const getUser = (req, res) => {
-    const user = fetchUser();
+export const createUserController = async (req, res) => {
+    const { name, email } = req.body;
+
+    const user = await createUser({ name, email });
+
+    res.status(201).json(user);
+};
+
+export const getUserContoller = async (req, res) => {
+    const user = await getUser();
     res.json(user);
 };

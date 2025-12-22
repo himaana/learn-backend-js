@@ -1,6 +1,9 @@
-export const fetchUser = () => {
-    return {
-        name: "Admin",
-        role: "Developer",
-    };
+import prisma from "../prisma.js";
+
+export const createUser = async (data) => {
+    return await prisma.user.create({ data });
+};
+
+export const getUser = async () => {
+    return await prisma.user.findMany();
 };
