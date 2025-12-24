@@ -9,14 +9,22 @@ export const getUser = async () => {
 };
 
 export const updateUser = async (id, data) => {
-    return await prisma.user.update({
-        where: { id },
-        data,
-    });
+    try {
+        return await prisma.user.update({
+            where: { id },
+            data,
+        });
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const deleteUser = async (id) => {
-    return await prisma.user.delete({
-        where: { id },
-    });
+    try {
+        return await prisma.user.delete({
+            where: { id },
+        });
+    } catch (error) {
+        throw error;
+    }
 };
