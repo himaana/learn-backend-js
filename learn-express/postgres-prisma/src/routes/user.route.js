@@ -12,10 +12,12 @@ import {
     updateUserSchema,
 } from "../validations/user.validation.js";
 
+import { authMiddleware } from "../middlewares/auth.middleware.js";
+
 const router = express.Router();
 
 router.post("/", validate(createUserSchema), createUserController);
-router.get("/", getUserContoller);
+router.get("/", authMiddleware, getUserContoller);
 router.put("/:id", validate(updateUserSchema), updateUserController);
 router.delete("/:id", deleteUserController);
 

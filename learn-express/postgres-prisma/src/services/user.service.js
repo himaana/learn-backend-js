@@ -1,4 +1,5 @@
 import prisma from "../prisma.js";
+import bcrypt from "bcrypt";
 
 export const createUser = async (data) => {
     return await prisma.user.create({ data });
@@ -27,4 +28,16 @@ export const deleteUser = async (id) => {
     } catch (error) {
         throw error;
     }
+};
+
+export const registerUser = async ({ name, email, password }) => {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    return await prisma.user.create({
+        data: {
+            name,
+            email,
+            password: hashedPassword,
+        },
+    });
 };
